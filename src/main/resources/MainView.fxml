@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controllers.Main"
+
+            prefHeight="400.0" prefWidth="600.0">
+
+    <HBox>
+        <children>
+            <VBox>
+                <children>
+                    <Button fx:id="load_image"
+                            text="Download"/>
+                    <Button fx:id="save_image"
+                            text="Save"/>
+                    <Label text="Bright"/>
+                    <Slider fx:id="brightness_image"
+                    min="0"
+                    max="100"
+                    showTickLabels="true"
+                    showTickMarks="true"/>
+                    <CheckBox fx:id="not_image"
+                    text="Inversion"/>
+
+                    <Label text="Red"/>
+                    <Slider fx:id="red_image"
+                            min="0"
+                            max="255"
+                            showTickLabels="true"
+                            showTickMarks="true"/>
+                    <Label text="Green"/>
+                    <Slider fx:id="green_image"
+                            min="0"
+                            max="255"
+                            showTickLabels="true"
+                            showTickMarks="true"/>
+                    <Label text="Blue"/>
+                    <Slider fx:id="blue_image"
+                            min="0"
+                            max="255"
+                            showTickLabels="true"
+                            showTickMarks="true"/>
+                </children>
+            </VBox>
+            <ImageView fx:id="view_image"
+                       fitWidth="100.0"
+                       fitHeight="100.0">
+                <Image url="shabaka.jpg"/>
+            </ImageView>
+        </children>
+    </HBox>
+
+
+</AnchorPane>
