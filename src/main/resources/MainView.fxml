@@ -10,7 +10,7 @@
 <?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.Main"
+            fx:controller="controllers.MainController"
 
             prefHeight="400.0" prefWidth="600.0">
 
@@ -18,43 +18,51 @@
         <children>
             <VBox>
                 <children>
-                    <Button fx:id="load_image"
+                    <Button fx:id="loadButton"
+                            onAction="#onClickDownload"
                             text="Download"/>
-                    <Button fx:id="save_image"
+                    <Button fx:id="saveButton"
+                            onAction="#OnClickSave"
                             text="Save"/>
                     <Label text="Bright"/>
-                    <Slider fx:id="brightness_image"
-                    min="0"
-                    max="100"
-                    showTickLabels="true"
-                    showTickMarks="true"/>
-                    <CheckBox fx:id="not_image"
-                    text="Inversion"/>
+                    <Slider fx:id="brightnessSlider"
+                            min="0"
+                            max="100"
+                            blockIncrement="1.0"
+                            showTickLabels="true"
+                            showTickMarks="true"/>
+                    <CheckBox fx:id="inversionCheckbox"
+                              onAction="#onClickInversion"
+                            text="Inversion"/>
 
                     <Label text="Red"/>
-                    <Slider fx:id="red_image"
+                    <Slider fx:id="redSlider"
                             min="0"
                             max="255"
+                            blockIncrement="1.0"
                             showTickLabels="true"
                             showTickMarks="true"/>
                     <Label text="Green"/>
-                    <Slider fx:id="green_image"
+                    <Slider fx:id="greenSlider"
                             min="0"
                             max="255"
+                            blockIncrement="1.0"
                             showTickLabels="true"
                             showTickMarks="true"/>
                     <Label text="Blue"/>
-                    <Slider fx:id="blue_image"
+                    <Slider fx:id="blueSlider"
                             min="0"
                             max="255"
+                            blockIncrement="1.0"
                             showTickLabels="true"
                             showTickMarks="true"/>
                 </children>
             </VBox>
-            <ImageView fx:id="view_image"
+            <ImageView fx:id="imageView"
                        fitWidth="100.0"
                        fitHeight="100.0">
-                <Image url="shabaka.jpg"/>
+                <Image fx:id="image"
+                       url="shabaka.jpg"/>
             </ImageView>
         </children>
     </HBox>

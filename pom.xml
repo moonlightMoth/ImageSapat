@@ -49,7 +49,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>controllers.Main</mainClass>
+                    <mainClass>MainApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>
