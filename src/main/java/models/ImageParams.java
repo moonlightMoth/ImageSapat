@@ -21,6 +21,11 @@ public class ImageParams
         return image;
     }
 
+    public void setImage(Image image)
+    {
+        this.image = image;
+    }
+
     private static ImageParams curState;
 
     private ImageParams() { }

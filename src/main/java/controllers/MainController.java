@@ -108,6 +108,8 @@ public class MainController
 
         sapator = ColorSapator.getInstance();
         sapator.doSapat();
+
+        imageView.setImage(ImageParams.getInstance().getImage());
     }
 
     @FXML
