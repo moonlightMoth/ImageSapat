@@ -9,9 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.TouchEvent;
+import javafx.stage.FileChooser;
 import models.ImageParams;
 import models.sapators.*;
+
+import java.io.File;
 
 public class MainController
 {
@@ -39,11 +43,26 @@ public class MainController
     @FXML
     private Image image;
 
+    @FXML
+    private ImageView imageView;
+
 
     @FXML
     private void OnClickSave(ActionEvent actionEvent)
     {
         sapator = SaveSapator.getInstance();
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(primaryStage);
+
+        if (file != null) {
+            saveTextToFile(sampleText, file);
+        }
         sapator.doSapat();
     }
 
@@ -60,6 +79,11 @@ public class MainController
     public void onClickDownload(ActionEvent actionEvent)
     {
         DownloadSapator.getInstance().doSapat();
+
+        System.out.println(ImageParams.getInstance().getPicStart());
+        image = new Image(
+            new File(ImageParams.getInstance().getPicStart()).toURI().toString());
+        imageView.setImage(image);
     }
 
     public void onClickInversion(ActionEvent actionEvent)

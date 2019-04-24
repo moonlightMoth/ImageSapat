@@ -5,8 +5,10 @@ import javafx.scene.image.Image;
 
 public class ImageParams
 {
-    private StringProperty picStart;
-    private StringProperty picSave;
+    //full path
+    private StringProperty picSave = new SimpleStringProperty();
+    //full path
+    private StringProperty picStart = new SimpleStringProperty();
     private IntegerProperty bright = new SimpleIntegerProperty();
     private BooleanProperty inversion = new SimpleBooleanProperty();
     private IntegerProperty Rcolor = new SimpleIntegerProperty();

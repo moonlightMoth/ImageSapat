@@ -6,6 +6,8 @@ public class SaveSapator implements Sapator
     public void doSapat()
     {
         System.out.println("anfhafb");
+
+
     }
     private static SaveSapator ourInstance;
 
