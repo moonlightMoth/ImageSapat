@@ -51,18 +51,7 @@ public class MainController
     private void OnClickSave(ActionEvent actionEvent)
     {
         sapator = SaveSapator.getInstance();
-        FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        //Show save file dialog
-        File file = fileChooser.showSaveDialog(primaryStage);
-
-        if (file != null) {
-            saveTextToFile(sampleText, file);
-        }
         sapator.doSapat();
     }
 
