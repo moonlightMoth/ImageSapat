@@ -1,3 +1,4 @@
+import controllers.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,8 @@ public class MainApp extends Application
                 MainApp.class.getResource("/MainView.fxml"));
         AnchorPane page = loader.load();
         Scene scene = new Scene(page);
+
+        MainController.setStage(stage);
 
         stage.setTitle("suus");
         stage.setScene(scene);

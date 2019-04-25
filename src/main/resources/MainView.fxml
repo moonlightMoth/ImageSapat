@@ -61,8 +61,6 @@
             <ImageView fx:id="imageView"
                        fitWidth="100.0"
                        fitHeight="100.0">
-                <Image fx:id="image"
-                       url="shabaka.jpg"/>
             </ImageView>
         </children>
     </HBox>

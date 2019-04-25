@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TouchEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import models.ImageParams;
 import models.sapators.*;
 
@@ -19,7 +20,7 @@ import java.io.File;
 
 public class MainController
 {
-    private static Scene scene = null;
+    private static Stage stage = null;
     private Sapator sapator;
 
     @FXML
@@ -46,6 +47,15 @@ public class MainController
     @FXML
     private ImageView imageView;
 
+    public static Stage getStage()
+    {
+        return stage;
+    }
+
+    public static void setStage(Stage stage)
+    {
+        MainController.stage = stage;
+    }
 
     @FXML
     private void OnClickSave(ActionEvent actionEvent)
@@ -110,11 +120,15 @@ public class MainController
         sapator.doSapat();
 
         imageView.setImage(ImageParams.getInstance().getImage());
+
     }
 
     @FXML
     private void initialize()
     {
+        ImageParams.getInstance().setImage(new Image("file:src/main/resources/shabaka.jpg"));
+        imageView.setImage(ImageParams.getInstance().getImage());
+
         brightnessSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
                         onChangeBright(newNumber.intValue()));

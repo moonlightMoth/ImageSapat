@@ -14,7 +14,7 @@ public class ImageParams
     private IntegerProperty Rcolor = new SimpleIntegerProperty();
     private IntegerProperty Gcolor = new SimpleIntegerProperty();
     private IntegerProperty Bcolor = new SimpleIntegerProperty();
-    private Image image = new Image("file:/src/main/resources/shabaka.jpg");
+    private Image image = new Image("file:src/main/resources/shabaka.jpg");
 
     public Image getImage()
     {
