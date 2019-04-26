@@ -1,4 +1,4 @@
-BMP image
+image
 buttons for download and save i.
 window of current appearance of i.
 Funcs:
