@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritablePixelFormat;
+import models.ImageConverter;
 import models.ImageParams;
 
 import java.io.ByteArrayInputStream;
@@ -21,16 +22,16 @@ public class ColorSapator implements Sapator
 
         byte[] i = getPixels(im, 0,0);
 
-        for (byte b : i)
-        {
-            b += 100;
-        }
+//        for (int j = 0; j < i.length; j++)
+//        {
+//            if (j % 4 == 3)
+//                i[j] += 10;
+//        }
 
 
-        im = new Image(new ByteArrayInputStream(i));
+        im = new ImageConverter().getJavaFXImage(i, (int)im.getWidth(), (int)im.getHeight());
 
         ImageParams.getInstance().setImage(im);
-
     }
 
     private static ColorSapator ourInstance;
@@ -57,17 +58,9 @@ public class ColorSapator implements Sapator
 
         byte[] buf = new byte[w * h * 4];
 
-        img.
-                getPixelReader().
-                getPixels(
-                        0,
-                        0,
-                        w,
-                        h,
-                PixelFormat.
-                        getByteBgraInstance(),
-                buf,
-                0, w * 4);
+        img.getPixelReader().getPixels(
+                0, 0, w, h, PixelFormat.getByteBgraInstance(),
+                buf, 0, w * 4);
 
         return buf;
     }
