@@ -20,56 +20,32 @@ public class InversionSapator implements Sapator
 
         Image image = ImageParams.getInstance().getImage();
         PixelReader reader = image.getPixelReader();
-//        System.out.println(image.getUrl());
 
-        // Load the Image into a Java FX Image Object //
-
-        Image img = null;
+        BufferedImage img = null;
         try {
-            img = new Image(new FileInputStream("./src/main/resources/shabaka.jpg") );
+            img = ImageIO.read(
+                new FileInputStream(ImageParams.getInstance().getPicStart()));
+
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            ImageIO.write(img,"jpg", bao);
+
+            int pixel;
+            for (int x = 0; x < img.getWidth(); x++) {
+                for (int y = 0; y < img.getHeight(); y++) {
+                    pixel = img.getRGB(x, y);
+                    img.setRGB(x, y, ~pixel);
+                }
+            }
+
+            File tmp = new File("./src/main/resources/tmp.jpg");
+            ImageIO.write(img, "jpg", tmp);
+            ImageParams.getInstance().setPicStart("./src/main/resources/tmp.jpg");
 
 
-        // Cache Width and Height to 'int's (because getWidth/getHeight return Double) and getPixels needs 'int's //
-
-        int w = (int)img.getWidth();
-        int h = (int)img.getHeight();
-
-    // Create a new Byte Buffer, but we'll use BGRA (1 byte for each channel) //
-
-        byte[] buf = new byte[w * h * 4];
-
-    /* Since you can get the output in whatever format with a WritablePixelFormat,
-       we'll use an already created one for ease-of-use. */
-
-        img.getPixelReader().getPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), buf, 0, w * 4);
-
-        for (byte b : buf)
-        {
-            b = (byte) ~b;
-        }
-
-        ByteArrayInputStream bis = new ByteArrayInputStream(buf);
-        BufferedImage bImage2 = ImageIO.read(bis);
-
-        ImageIO.write(bImage2, "jpg", new File("./src/main/resources/output.jpg") );
-        System.out.println("image created");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    /* Second last parameter is byte offset you want to start in your buffer,
-       and the last parameter is stride (in bytes) per line for your buffer. */
-
-        /*int pixel;
-        for (int i = 0; i < image.getWidth(); i++)
-        {
-            for (int j = 0; j < image.getHeight(); j++)
-            {
-                pixel = reader.getArgb(i, j);
-                pixel = ~pixel;
-
-            }
-        }*/
 
     }
 

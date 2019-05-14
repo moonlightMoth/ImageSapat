@@ -8,7 +8,7 @@ public class ImageParams
     //full path
     private StringProperty picSave = new SimpleStringProperty();
     //full path
-    private StringProperty picStart = new SimpleStringProperty();
+    private StringProperty picStart = new SimpleStringProperty("./src/main/resources/shabaka.jpg");
     private IntegerProperty bright = new SimpleIntegerProperty();
     private BooleanProperty inversion = new SimpleBooleanProperty();
     private IntegerProperty Rcolor = new SimpleIntegerProperty();
@@ -28,7 +28,8 @@ public class ImageParams
 
     private static ImageParams curState;
 
-    private ImageParams() { }
+    private ImageParams() {
+    }
 
     public static ImageParams getInstance()
     {

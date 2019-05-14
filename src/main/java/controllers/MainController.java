@@ -90,6 +90,7 @@ public class MainController
         ImageParams.getInstance().setInversion(inversionCheckbox.isSelected());
 
         InversionSapator.getInstance().doSapat();
+        imageView.setImage(new Image("file:src/main/resources/tmp.jpg"));
     }
 
     private enum Color{
