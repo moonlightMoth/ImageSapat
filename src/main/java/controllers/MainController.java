@@ -57,6 +57,8 @@ public class MainController
         MainController.stage = stage;
     }
 
+
+
     @FXML
     private void OnClickSave(ActionEvent actionEvent)
     {
@@ -79,7 +81,6 @@ public class MainController
     {
         DownloadSapator.getInstance().doSapat();
 
-        System.out.println(ImageParams.getInstance().getPicStart());
         image = new Image(
             new File(ImageParams.getInstance().getPicStart()).toURI().toString());
         imageView.setImage(image);

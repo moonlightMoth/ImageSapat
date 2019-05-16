@@ -18,6 +18,8 @@ public class InversionSapator implements Sapator
     {
 //        System.out.println("Hell"); //TODO sus
 
+//        System.out.println("inversion");
+
         Image image = ImageParams.getInstance().getImage();
         PixelReader reader = image.getPixelReader();
 

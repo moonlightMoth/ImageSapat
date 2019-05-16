@@ -1,5 +1,6 @@
 package models.sapators;
 
+import controllers.MainController;
 import javafx.stage.FileChooser;
 import models.ImageParams;
 
@@ -10,9 +11,8 @@ public class DownloadSapator implements Sapator
     @Override
     public void doSapat()
     {
-        System.out.println("Down");
         FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
+        File selectedFile = fileChooser.showOpenDialog(MainController.getStage());
 
         if (selectedFile != null)
         {
