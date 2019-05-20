@@ -4,7 +4,9 @@ import controllers.MainController;
 import javafx.stage.FileChooser;
 import models.ImageParams;
 
+import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 
 public class DownloadSapator implements Sapator
 {
@@ -12,11 +14,20 @@ public class DownloadSapator implements Sapator
     public void doSapat()
     {
         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open image");
         File selectedFile = fileChooser.showOpenDialog(MainController.getStage());
 
         if (selectedFile != null)
         {
-            ImageParams.getInstance().setPicStart(selectedFile.getAbsolutePath());
+            try
+            {
+                ImageParams.getInstance().setBufferedImage(ImageIO.read(selectedFile.getAbsoluteFile()));
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                //TODO: write alert
+            }
         }
 
     }

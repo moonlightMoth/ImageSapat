@@ -1,22 +1,20 @@
 package controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.TouchEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import models.ImageParams;
+import models.ObservableBufferedImage;
 import models.sapators.*;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 public class MainController
 {
@@ -80,10 +78,6 @@ public class MainController
     public void onClickDownload(ActionEvent actionEvent)
     {
         DownloadSapator.getInstance().doSapat();
-
-        image = new Image(
-            new File(ImageParams.getInstance().getPicStart()).toURI().toString());
-        imageView.setImage(image);
     }
 
     public void onClickInversion(ActionEvent actionEvent)
@@ -91,61 +85,100 @@ public class MainController
         ImageParams.getInstance().setInversion(inversionCheckbox.isSelected());
 
         InversionSapator.getInstance().doSapat();
-        imageView.setImage(new Image("file:src/main/resources/tmp.jpg"));
     }
 
     private enum Color{
         RED, GREEN, BLUE
     }
 
-    private void onChangeColor(int newColor, Color color)
+    private void onChangeColor(int deltaColor, Color color)
     {
+        ImageParams.getInstance().setBcolor(0);
+        ImageParams.getInstance().setRcolor(0);
+        ImageParams.getInstance().setGcolor(0);
         switch (color)
         {
             case RED:
-                ImageParams.getInstance().setRcolor(newColor);
+                ImageParams.getInstance().setRcolor(deltaColor);
                 break;
 
             case GREEN:
-                ImageParams.getInstance().setGcolor(newColor);
+                ImageParams.getInstance().setGcolor(deltaColor);
                 break;
 
             case BLUE:
-                ImageParams.getInstance().setBcolor(newColor);
+                ImageParams.getInstance().setBcolor(deltaColor);
                 break;
         }
 
 
-        System.out.println(newColor + " " + color.toString());
+        System.out.println(deltaColor + " " + color.toString());
 
         sapator = ColorSapator.getInstance();
         sapator.doSapat();
 
-        imageView.setImage(ImageParams.getInstance().getImage());
+    }
 
+    private void setCurrentImageOnView() {
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        try
+        {
+            ImageIO.write(ImageParams.getInstance().getObservableBufferedImage(),"jpg", bao);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(bao.toByteArray());
+
+        imageView.setImage(new Image(bis));
     }
 
     @FXML
     private void initialize()
     {
-        ImageParams.getInstance().setImage(new Image("file:src/main/resources/shabaka.jpg"));
-        imageView.setImage(ImageParams.getInstance().getImage());
+        BufferedImage img = null;
+
+        ObservableBufferedImage obs = new ObservableBufferedImage(img);
+
+        obs.addListener(this::setCurrentImageOnView);
+
+        ImageParams.getInstance().setObservableBufferedImage(obs);
+
+
+        try
+        {
+            img = ImageIO.read(
+                    new FileInputStream(ImageParams.getInstance().PIC_START));
+
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            ImageIO.write(img,"jpg", bao);
+            ImageParams.getInstance().setBufferedImage(img);
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
 
         brightnessSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
-                        onChangeBright(newNumber.intValue()));
+                        onChangeBright(newNumber.intValue()-number.intValue()));
 
         redSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue(), Color.RED));
+                        onChangeColor(newNumber.intValue()-number.intValue(), Color.RED));
 
         greenSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue(), Color.GREEN));
+                        onChangeColor(newNumber.intValue()-number.intValue(), Color.GREEN));
 
         blueSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue(), Color.BLUE));
+                        onChangeColor(newNumber.intValue()-number.intValue(), Color.BLUE));
+
 
     }
 }

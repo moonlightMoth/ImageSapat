@@ -1,30 +1,17 @@
 package models;
 
 import javafx.beans.property.*;
-import javafx.scene.image.Image;
+import java.awt.image.BufferedImage;
 
 public class ImageParams
 {
-    //full path
-    private StringProperty picSave = new SimpleStringProperty();
-    //full path
-    private StringProperty picStart = new SimpleStringProperty("./src/main/resources/shabaka.jpg");
+    public static final String PIC_START = "./src/main/resources/shabaka.jpg";
     private IntegerProperty bright = new SimpleIntegerProperty();
     private BooleanProperty inversion = new SimpleBooleanProperty();
     private IntegerProperty Rcolor = new SimpleIntegerProperty();
     private IntegerProperty Gcolor = new SimpleIntegerProperty();
     private IntegerProperty Bcolor = new SimpleIntegerProperty();
-    private Image image = new Image("file:src/main/resources/shabaka.jpg");
-
-    public Image getImage()
-    {
-        return image;
-    }
-
-    public void setImage(Image image)
-    {
-        this.image = image;
-    }
+    private ObservableBufferedImage observableBufferedImage;
 
     private static ImageParams curState;
 
@@ -40,35 +27,8 @@ public class ImageParams
         return curState;
     }
 
-    public String getPicStart()
-    {
-        return picStart.get();
-    }
 
-    public StringProperty picStartProperty()
-    {
-        return picStart;
-    }
 
-    public void setPicStart(String picStart)
-    {
-        this.picStart.set(picStart);
-    }
-
-    public String getPicSave()
-    {
-        return picSave.get();
-    }
-
-    public StringProperty picSaveProperty()
-    {
-        return picSave;
-    }
-
-    public void setPicSave(String picSave)
-    {
-        this.picSave.set(picSave);
-    }
 
     public int getBright()
     {
@@ -143,5 +103,20 @@ public class ImageParams
     public void setBcolor(int bcolor)
     {
         this.Bcolor.set(bcolor);
+    }
+
+    public void setObservableBufferedImage(ObservableBufferedImage observableBufferedImage)
+    {
+        this.observableBufferedImage = observableBufferedImage;
+    }
+
+    public void setBufferedImage(BufferedImage bufferedImage)
+    {
+        this.observableBufferedImage.setBufferedImage(bufferedImage);
+    }
+
+    public BufferedImage getObservableBufferedImage()
+    {
+        return observableBufferedImage.getBufferedImage();
     }
 }
