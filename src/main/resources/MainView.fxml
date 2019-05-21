@@ -59,8 +59,8 @@
                 </children>
             </VBox>
             <ImageView fx:id="imageView"
-                       fitWidth="100.0"
-                       fitHeight="100.0">
+                       fitWidth="400.0"
+                       fitHeight="400.0">
             </ImageView>
         </children>
     </HBox>

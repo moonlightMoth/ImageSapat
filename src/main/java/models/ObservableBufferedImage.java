@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class ObservableBufferedImage
 {
     private BufferedImage bufferedImage;
-    private Listener listener;
+    private Runnable runnable;
 
     public ObservableBufferedImage(BufferedImage bi)
     {
@@ -15,7 +15,7 @@ public class ObservableBufferedImage
     public void setBufferedImage(BufferedImage bufferedImage)
     {
         this.bufferedImage = bufferedImage;
-        listener.onAction();
+        runnable.run();
     }
 
     public BufferedImage getBufferedImage()
@@ -23,8 +23,9 @@ public class ObservableBufferedImage
         return bufferedImage;
     }
 
-    public void addListener(Listener listener)
+    public void addListener(Runnable runnable)
     {
-        this.listener = listener;
+        this.runnable = runnable;
     }
+
 }

@@ -45,6 +45,8 @@ public class MainController
     @FXML
     private ImageView imageView;
 
+//    static private PixelSapator pixelSapator = new PixelSapator();
+
     public static Stage getStage()
     {
         return stage;
@@ -72,7 +74,7 @@ public class MainController
 
         System.out.println(ImageParams.getInstance().getBright());
 
-        BrightSapator.getInstance().doSapat();
+        PixelSapator.brightSapator.doSapat();
     }
 
     public void onClickDownload(ActionEvent actionEvent)
@@ -84,7 +86,7 @@ public class MainController
     {
         ImageParams.getInstance().setInversion(inversionCheckbox.isSelected());
 
-        InversionSapator.getInstance().doSapat();
+        PixelSapator.invSapator.doSapat();
     }
 
     private enum Color{
@@ -114,8 +116,7 @@ public class MainController
 
         System.out.println(deltaColor + " " + color.toString());
 
-        sapator = ColorSapator.getInstance();
-        sapator.doSapat();
+        PixelSapator.colorSapator.doSapat();
 
     }
 
