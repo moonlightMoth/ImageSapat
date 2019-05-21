@@ -19,7 +19,6 @@ import java.io.*;
 public class MainController
 {
     private static Stage stage = null;
-    private Sapator sapator;
 
     @FXML
     private Button save;
@@ -62,9 +61,11 @@ public class MainController
     @FXML
     private void OnClickSave(ActionEvent actionEvent)
     {
-        sapator = SaveSapator.getInstance();
-
-        sapator.doSapat();
+        try {
+            FileSapator.doSapat(FileSapator.MOOD.SAVE);
+        } catch (IOException e) {
+            e.printStackTrace();//TODO
+        }
     }
 
 
@@ -79,7 +80,11 @@ public class MainController
 
     public void onClickDownload(ActionEvent actionEvent)
     {
-        DownloadSapator.getInstance().doSapat();
+        try {
+            FileSapator.doSapat(FileSapator.MOOD.OPEN);
+        } catch (IOException e) {
+            e.printStackTrace();//TODO
+        }
     }
 
     public void onClickInversion(ActionEvent actionEvent)
