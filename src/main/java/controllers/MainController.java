@@ -21,7 +21,7 @@ public class MainController
     private static Stage stage = null;
 
     @FXML
-    private Button save;
+    private Button saveButton;
 
     @FXML
     private Slider brightnessSlider;
@@ -39,12 +39,11 @@ public class MainController
     private CheckBox inversionCheckbox;
 
     @FXML
-    private Image image;
+    private Button downloadButton;
 
     @FXML
     private ImageView imageView;
 
-//    static private PixelSapator pixelSapator = new PixelSapator();
 
     public static Stage getStage()
     {
@@ -57,9 +56,7 @@ public class MainController
     }
 
 
-
-    @FXML
-    private void OnClickSave(ActionEvent actionEvent)
+    private void onClickSave()
     {
         try {
             FileSapator.doSapat(FileSapator.MOOD.SAVE);
@@ -78,7 +75,7 @@ public class MainController
         PixelSapator.brightSapator.doSapat();
     }
 
-    public void onClickDownload(ActionEvent actionEvent)
+    private void onClickDownload()
     {
         try {
             FileSapator.doSapat(FileSapator.MOOD.OPEN);
@@ -87,7 +84,7 @@ public class MainController
         }
     }
 
-    public void onClickInversion(ActionEvent actionEvent)
+    public void onClickInversion()
     {
         ImageParams.getInstance().setInversion(inversionCheckbox.isSelected());
 
@@ -185,6 +182,9 @@ public class MainController
                 (observableValue, number, newNumber) ->
                         onChangeColor(newNumber.intValue()-number.intValue(), Color.BLUE));
 
+        saveButton.setOnAction((actionEvent) -> onClickSave());
+
+        downloadButton.setOnAction((actionEvent -> onClickDownload()));
 
     }
 }

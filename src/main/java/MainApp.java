@@ -18,7 +18,7 @@ public class MainApp extends Application
 
         MainController.setStage(stage);
 
-        stage.setTitle("suus");
+        stage.setTitle("ImageSapator");
         stage.setScene(scene);
         stage.show();
 

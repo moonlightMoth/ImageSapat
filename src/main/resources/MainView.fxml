@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controllers.MainController"
@@ -16,48 +16,59 @@
 
     <HBox>
         <children>
-            <VBox>
-                <children>
-                    <Button fx:id="loadButton"
-                            onAction="#onClickDownload"
-                            text="Download"/>
-                    <Button fx:id="saveButton"
-                            onAction="#OnClickSave"
-                            text="Save"/>
-                    <Label text="Bright"/>
-                    <Slider fx:id="brightnessSlider"
-                            min="0"
-                            max="100"
-                            blockIncrement="1.0"
-                            showTickLabels="true"
-                            showTickMarks="true"/>
-                    <CheckBox fx:id="inversionCheckbox"
-                              onAction="#onClickInversion"
-                            text="Inversion"/>
 
-                    <Label text="Red"/>
-                    <Slider fx:id="redSlider"
-                            min="0"
-                            max="255"
-                            blockIncrement="1.0"
-                            showTickLabels="true"
-                            showTickMarks="true"/>
-                    <Label text="Green"/>
-                    <Slider fx:id="greenSlider"
-                            min="0"
-                            max="255"
-                            blockIncrement="1.0"
-                            showTickLabels="true"
-                            showTickMarks="true"/>
-                    <Label text="Blue"/>
-                    <Slider fx:id="blueSlider"
-                            min="0"
-                            max="255"
-                            blockIncrement="1.0"
-                            showTickLabels="true"
-                            showTickMarks="true"/>
-                </children>
-            </VBox>
+            <GridPane alignment="CENTER_LEFT">
+                <VBox>
+                    <children>
+                        <Button fx:id="downloadButton"
+                                text="Download"/>
+
+                        <Button fx:id="saveButton"
+                                text="Save"/>
+
+                        <Label text="Bright"/>
+
+                        <Slider fx:id="brightnessSlider"
+                                min="0"
+                                max="100"
+                                blockIncrement="1.0"
+                                showTickLabels="true"
+                                showTickMarks="true"/>
+
+                        <CheckBox fx:id="inversionCheckbox"
+                                  onAction="#onClickInversion"
+                                  text="Inversion"/>
+
+                        <Label text="Red"/>
+
+                        <Slider fx:id="redSlider"
+                                min="0"
+                                max="255"
+                                blockIncrement="1.0"
+                                showTickLabels="true"
+                                showTickMarks="true"/>
+
+                        <Label text="Green"/>
+
+                        <Slider fx:id="greenSlider"
+                                min="0"
+                                max="255"
+                                blockIncrement="1.0"
+                                showTickLabels="true"
+                                showTickMarks="true"/>
+
+                        <Label text="Blue"/>
+
+                        <Slider fx:id="blueSlider"
+                                min="0"
+                                max="255"
+                                blockIncrement="1.0"
+                                showTickLabels="true"
+                                showTickMarks="true"/>
+                    </children>
+                </VBox>
+            </GridPane>
+
             <ImageView fx:id="imageView"
                        fitWidth="400.0"
                        fitHeight="400.0">
