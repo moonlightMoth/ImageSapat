@@ -1,6 +1,6 @@
-package models.sapators;
+package sapator.image.models.sapators;
 
-import models.ImageParams;
+import sapator.image.models.ImageParams;
 import java.awt.image.BufferedImage;
 import java.util.function.Function;
 

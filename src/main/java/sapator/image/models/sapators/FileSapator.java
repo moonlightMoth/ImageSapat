@@ -1,8 +1,8 @@
-package models.sapators;
+package sapator.image.models.sapators;
 
-import controllers.MainController;
+import sapator.image.controllers.MainController;
 import javafx.stage.FileChooser;
-import models.ImageParams;
+import sapator.image.models.ImageParams;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -13,23 +13,28 @@ public class FileSapator
 {
     public enum MOOD
     {
-        SAVE ("Save Image", (chooser) -> {
+        SAVE ("Save Image", (chooser) ->
+        {
             return chooser.showSaveDialog(MainController.getStage());
         }),
-        OPEN ("Open Image", (chooser) -> {
+
+        OPEN ("Open Image", (chooser) ->
+        {
             return chooser.showOpenDialog(MainController.getStage());
         });
 
         private String description;
         private Function<FileChooser, File> getFile;
 
-        MOOD(String description, Function<FileChooser, File> getFile) {
+        MOOD(String description, Function<FileChooser, File> getFile)
+        {
             this.description = description;
             this.getFile = getFile;
         }
     }
 
-    public static void doSapat(MOOD mood) throws IOException {
+    public static void doSapat(MOOD mood) throws IOException
+    {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(mood.description);
@@ -45,6 +50,7 @@ public class FileSapator
                             .getObservableBufferedImage(),
                         "jpg", file);
                     break;
+
                 case OPEN:
                     ImageParams.getInstance()
                         .setBufferedImage(ImageIO.read(file.getAbsoluteFile()));

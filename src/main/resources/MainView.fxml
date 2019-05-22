@@ -10,7 +10,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.MainController"
+            fx:controller="sapator.image.controllers.MainController"
 
             prefHeight="400.0" prefWidth="600.0">
 

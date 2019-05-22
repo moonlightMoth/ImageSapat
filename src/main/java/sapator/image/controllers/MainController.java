@@ -1,6 +1,5 @@
-package controllers;
+package sapator.image.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -8,9 +7,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import models.ImageParams;
-import models.ObservableBufferedImage;
-import models.sapators.*;
+import sapator.image.models.ImageParams;
+import sapator.image.models.ObservableBufferedImage;
+import sapator.image.models.sapators.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

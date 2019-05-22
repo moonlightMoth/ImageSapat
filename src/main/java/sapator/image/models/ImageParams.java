@@ -1,4 +1,4 @@
-package models;
+package sapator.image.models;
 
 import javafx.beans.property.*;
 import java.awt.image.BufferedImage;

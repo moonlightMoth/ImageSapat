@@ -1,4 +1,4 @@
-package models;
+package sapator.image.models;
 
 import java.awt.image.BufferedImage;
 
