@@ -17,10 +17,50 @@ public class PixelSapator
         int g = (pixel >> 8) % 256;
         int r = (pixel >> 16) % 256;
 
-        r = (r + rS > 255 ? 255 : r + rS);
-        g = (g + gS > 255 ? 255 : g + gS);
-        b = (b + bS > 255 ? 255 : b + gS);
-        return (r<<16) + (g<<8) + b;
+//        System.out.format("%h  ", pixel);
+//        System.out.format("%h ", r);
+//        System.out.format("%h ", g);
+//        System.out.format("%h ", b);
+//
+//        System.out.format("%h ", r << 24);
+//        System.out.format("%h ", g << 24 >> 8);
+//        System.out.format("%h ", b << 24 >> 16);
+//        System.out.format("%h       ", (((r << 24) + (g << 24 >> 8) + (b << 24 >> 16))));
+//        System.out.println();
+//
+//        System.out.format("%h  ", pixel);
+//        System.out.format("%h ", r);
+//        System.out.format("%h ", g);
+//        System.out.format("%h ", b);
+
+//        System.out.format("%h ", r << 24);
+//        System.out.format("%h ", ((g << 16) + 0x01000000));
+//        System.out.format("%h ", ((b << 8) + 0x00010000));
+//        System.out.format("%h       ", (((r << 24) + ((g << 16) + 0x01000000) + ((b << 8) + 0x00010000))>>8));
+//
+//        System.out.println();
+//        System.out.println();
+//
+        r = (r - rS < -254 ? -254 : r - rS);
+        g = (g - gS < -254 ? -254 : g - gS);
+        b = (b - bS < -254 ? -254 : b - gS);
+
+//        System.out.println(rS + " " + gS + " " + bS);
+
+//        System.out.format("%h  ", pixel);
+//        System.out.format("%h ", r);
+//        System.out.format("%h ", g);
+//        System.out.format("%h ", b);
+
+//        System.out.format("%h ", r << 24);
+//        System.out.format("%h ", ((g << 16) + 0x01000000));
+//        System.out.format("%h ", ((b << 8) + 0x00010000));
+//        System.out.format("%h       ", (((r << 24) + ((g << 16) + 0x01000000) + ((b << 8) + 0x00010000))>>8));
+//
+//        System.out.println();
+//        System.out.println();
+
+        return (((r << 24) + ((g << 16) + 0x01000000) + ((b << 8) + 0x00010000))>>8);
     });
 
     public static final PixelSapator brightSapator = new PixelSapator((pixel) -> {
