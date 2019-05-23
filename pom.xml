@@ -77,8 +77,8 @@
             </plugin>
         </plugins>
 
-        <sourceDirectory>src/main</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java/</testSourceDirectory>
     </build>
 
 </project>
