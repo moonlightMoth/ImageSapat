@@ -77,10 +77,23 @@ public class MainController
     private void onClickDownload()
     {
         try {
+            setStartValues();
+
             FileSapator.doSapat(FileSapator.MOOD.OPEN);
         } catch (IOException e) {
             e.printStackTrace();//TODO
         }
+    }
+
+    private void setStartValues()
+    {
+        inversionCheckbox.setSelected(false);
+
+        brightnessSlider.setValue(brightnessSlider.getMin());
+
+        redSlider  .setValue(redSlider  .getMin());
+        blueSlider .setValue(blueSlider .getMin());
+        greenSlider.setValue(greenSlider.getMin());
     }
 
     public void onClickInversion()
@@ -148,11 +161,10 @@ public class MainController
 
         ImageParams.getInstance().setObservableBufferedImage(obs);
 
-
         try
         {
             img = ImageIO.read(
-                    new FileInputStream(ImageParams.getInstance().PIC_START));
+                    new FileInputStream(ImageParams.PIC_START));
 
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             ImageIO.write(img,"jpg", bao);
