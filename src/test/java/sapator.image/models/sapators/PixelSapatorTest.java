@@ -1,15 +1,12 @@
 package sapator.image.models.sapators;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import sapator.image.models.ImageParams;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.io.*;
 
-import org.apache.commons.io.FileUtils;
 import sapator.image.models.ObservableBufferedImage;
 
 public class PixelSapatorTest
@@ -17,9 +14,7 @@ public class PixelSapatorTest
     @Test
     public void testInversion() throws IOException {
         BufferedImage img = null;
-
         ObservableBufferedImage obs = new ObservableBufferedImage(img);
-
         obs.addListener(() -> {});
 
         ImageParams.getInstance().setObservableBufferedImage(obs);
@@ -44,32 +39,31 @@ public class PixelSapatorTest
             new File("./src/main/resources/rose.jpg"), temp));
     }
 
-    private static boolean compareImage(File fileA, File fileB) throws IOException {
+    private static boolean compareImage(File original, File copy) throws IOException {
 
-            BufferedImage biA = ImageIO.read(fileA);
-            DataBuffer dbA = biA.getData().getDataBuffer();
-            int sizeA = dbA.getSize();
+        BufferedImage originalImage = ImageIO.read(original);
+        BufferedImage copyImage = ImageIO.read(copy);
 
-            BufferedImage biB = ImageIO.read(fileB);
-            DataBuffer dbB = biB.getData().getDataBuffer();
-            int sizeB = dbB.getSize();
+        if ((originalImage.getHeight() == copyImage.getHeight()) &&
+            (originalImage.getWidth() == copyImage.getWidth()))
+        {
+            for (int x = 0; x < originalImage.getWidth(); x++) {
+                for (int y = 0; y < originalImage.getHeight(); y++) {
 
-            if(sizeA == sizeB)
-            {
-                for(int i=0; i<sizeA; i++)
-                {
-                    if(dbA.getElem(i) != dbB.getElem(i))
+                    if (originalImage.getRGB(x, y) != copyImage.getRGB(x, y))
                     {
+                        System.out.println("x: " + x + " y: " + y + "original: "
+                        + originalImage.getRGB(x, y) + " copy: " + copyImage.getRGB(x, y));
                         return false;
                     }
+
                 }
-
-                return true;
             }
-            else
-            {
-                return false;
-            }
-
+        } else
+        {
+            return false;
         }
+
+        return true;
+    }
 }
