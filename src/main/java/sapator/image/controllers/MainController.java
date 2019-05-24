@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sapator.image.models.ImageParams;
 import sapator.image.models.ObservableBufferedImage;
@@ -58,7 +59,7 @@ public class MainController
     private void onClickSave()
     {
         try {
-            FileSapator.doSapat(FileSapator.MOOD.SAVE);
+            FileSapator.doSapat(MOOD.SAVE, getFile(MOOD.SAVE));
         } catch (IOException e) {
             e.printStackTrace();//TODO
         }
@@ -79,10 +80,17 @@ public class MainController
         try {
             setStartValues();
 
-            FileSapator.doSapat(FileSapator.MOOD.OPEN);
+            FileSapator.doSapat(MOOD.OPEN, getFile(MOOD.OPEN));
         } catch (IOException e) {
             e.printStackTrace();//TODO
         }
+    }
+
+    private File getFile(MOOD mood) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(mood.getDescription());
+
+        return mood.getFile().apply(fileChooser);
     }
 
     private void setStartValues()

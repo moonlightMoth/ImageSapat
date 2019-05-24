@@ -1,46 +1,16 @@
 package sapator.image.models.sapators;
 
-import sapator.image.controllers.MainController;
-import javafx.stage.FileChooser;
+import sapator.image.controllers.MOOD;
 import sapator.image.models.ImageParams;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.util.function.Function;
 
 public class FileSapator
 {
-    public enum MOOD
+    public static void doSapat(MOOD mood, File file) throws IOException
     {
-        SAVE ("Save Image", (chooser) ->
-        {
-            return chooser.showSaveDialog(MainController.getStage());
-        }),
-
-        OPEN ("Open Image", (chooser) ->
-        {
-            return chooser.showOpenDialog(MainController.getStage());
-        });
-
-        private String description;
-        private Function<FileChooser, File> getFile;
-
-        MOOD(String description, Function<FileChooser, File> getFile)
-        {
-            this.description = description;
-            this.getFile = getFile;
-        }
-    }
-
-    public static void doSapat(MOOD mood) throws IOException
-    {
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(mood.description);
-
-        File file = mood.getFile.apply(fileChooser);
-
         if (file != null)
         {
             switch (mood) {
