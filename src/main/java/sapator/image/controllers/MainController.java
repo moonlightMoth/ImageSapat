@@ -13,7 +13,6 @@ import sapator.image.models.ObservableBufferedImage;
 import sapator.image.models.sapators.*;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class MainController
@@ -161,29 +160,9 @@ public class MainController
     @FXML
     private void initialize()
     {
-        BufferedImage img = null;
 
-        ObservableBufferedImage obs = new ObservableBufferedImage(img);
-
-        obs.addListener(this::setCurrentImageOnView);
-
-        ImageParams.getInstance().setObservableBufferedImage(obs);
-
-        try
-        {
-            img = ImageIO.read(
-                    new FileInputStream(ImageParams.PIC_START));
-
-            ByteArrayOutputStream bao = new ByteArrayOutputStream();
-            ImageIO.write(img,"jpg", bao);
-            ImageParams.getInstance().setBufferedImage(img);
-
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
+        ImageParams.getInstance().setObservableBufferedImage(new ObservableBufferedImage(this::setCurrentImageOnView));
+        setCurrentImageOnView();
 
         brightnessSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
