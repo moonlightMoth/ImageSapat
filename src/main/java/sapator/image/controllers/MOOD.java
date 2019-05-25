@@ -15,6 +15,11 @@ public enum MOOD
     OPEN ("Open Image", (chooser) ->
     {
         return chooser.showOpenDialog(MainController.getStage());
+    }),
+
+    RELOAD ("Reload current Image", (chooser) ->
+    {
+        return
     });
 
     private String description;

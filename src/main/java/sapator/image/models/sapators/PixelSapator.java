@@ -33,7 +33,7 @@ public class PixelSapator
 //        System.out.format("%h ", g);
 //        System.out.format("%h ", b);
 
-//        System.out.format("%h ", r << 24);
+//        System.out.format("%h ", r);
 //        System.out.format("%h ", ((g << 16) + 0x01000000));
 //        System.out.format("%h ", ((b << 8) + 0x00010000));
 //        System.out.format("%h       ", (((r << 24) + ((g << 16) + 0x01000000) + ((b << 8) + 0x00010000))>>8));
@@ -41,13 +41,31 @@ public class PixelSapator
 //        System.out.println();
 //        System.out.println();
 //
+        if (r == 0x00000000)
+        {
+            r = 0xffffff00;
+        }
+
+        if (g == 0x00000000)
+        {
+            g = 0xffffff00;
+        }
+
+        if (b == 0x00000000)
+        {
+            b = 0xffffff00;
+        }
+
         r = (r + rS > -1 ? -1 : r + rS);
         g = (g + gS > -1 ? -1 : g + gS);
         b = (b + bS > -1 ? -1 : b + bS);
 
+//        if (r == 0xffffffff)
+//            r = 0xffffff01;
+
 //        System.out.println(rS + " " + gS + " " + bS);
 
-//        System.out.format("%h ", r << 24);
+//        System.out.format("%h ", r);
 //        System.out.format("%h ", ((g << 16) + 0x01000000));
 //        System.out.format("%h ", ((b << 8) + 0x00010000));
 //        System.out.format("%h       ", (((r << 24) + ((g << 16) + 0x01000000) + ((b << 8) + 0x00010000))>>8) + 0xff000000);

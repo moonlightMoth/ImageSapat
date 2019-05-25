@@ -20,6 +20,12 @@ public class MainController
     private static Stage stage = null;
 
     @FXML
+    private Button downloadButton;
+
+    @FXML
+    private Button reloadButton;
+
+    @FXML
     private Button saveButton;
 
     @FXML
@@ -36,9 +42,6 @@ public class MainController
 
     @FXML
     private CheckBox inversionCheckbox;
-
-    @FXML
-    private Button downloadButton;
 
     @FXML
     private ImageView imageView;
@@ -69,8 +72,6 @@ public class MainController
     {
         ImageParams.getInstance().setBright(newBright);
 
-        System.out.println(ImageParams.getInstance().getBright());
-
         PixelSapator.brightSapator.doSapat();
     }
 
@@ -80,6 +81,17 @@ public class MainController
             setStartValues();
 
             FileSapator.doSapat(MOOD.OPEN, getFile(MOOD.OPEN));
+        } catch (IOException e) {
+            e.printStackTrace();//TODO
+        }
+    }
+
+    private void onClickReload()
+    {
+        try {
+            setStartValues();
+
+            FileSapator.doSapat(MOOD.RELOAD, getFile(MOOD.RELOAD));
         } catch (IOException e) {
             e.printStackTrace();//TODO
         }
@@ -134,9 +146,6 @@ public class MainController
                 break;
         }
 
-
-        System.out.println(deltaColor + " " + color.toString());
-
         PixelSapator.colorSapator.doSapat();
 
     }
@@ -183,6 +192,8 @@ public class MainController
         saveButton.setOnAction((actionEvent) -> onClickSave());
 
         downloadButton.setOnAction((actionEvent -> onClickDownload()));
+
+        reloadButton.setOnAction((actionEvent -> onClickReload()));
 
     }
 }
