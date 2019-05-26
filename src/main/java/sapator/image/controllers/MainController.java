@@ -161,7 +161,9 @@ public class MainController
     private void initialize()
     {
 
-        ImageParams.getInstance().setObservableBufferedImage(new ObservableBufferedImage(this::setCurrentImageOnView));
+        ImageParams.getInstance().setObservableBufferedImage(
+            new ObservableBufferedImage(this::setCurrentImageOnView));
+
         setCurrentImageOnView();
 
         brightnessSlider.valueProperty().addListener(
