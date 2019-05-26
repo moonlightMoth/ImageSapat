@@ -88,13 +88,9 @@ public class MainController
 
     private void onClickReload()
     {
-        try {
-            setStartValues();
+        setStartValues();
 
-            FileSapator.doSapat(MOOD.RELOAD, getFile(MOOD.RELOAD));
-        } catch (IOException e) {
-            e.printStackTrace();//TODO
-        }
+        initImage();
     }
 
     private File getFile(MOOD mood) {
@@ -108,11 +104,11 @@ public class MainController
     {
         inversionCheckbox.setSelected(false);
 
-        brightnessSlider.setValue(brightnessSlider.getMin());
+        brightnessSlider.setValue(0);
 
-        redSlider  .setValue(redSlider  .getMin());
-        blueSlider .setValue(blueSlider .getMin());
-        greenSlider.setValue(greenSlider.getMin());
+        redSlider  .setValue(0);
+        blueSlider .setValue(0);
+        greenSlider.setValue(0);
     }
 
     public void onClickInversion()
@@ -170,8 +166,7 @@ public class MainController
     private void initialize()
     {
 
-        ImageParams.getInstance().setObservableBufferedImage(new ObservableBufferedImage(this::setCurrentImageOnView));
-        setCurrentImageOnView();
+        initImage();
 
         brightnessSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
@@ -195,5 +190,14 @@ public class MainController
 
         reloadButton.setOnAction((actionEvent -> onClickReload()));
 
+    }
+
+    private void initImage()
+    {
+        ImageParams.getInstance().
+                setObservableBufferedImage(
+                        new ObservableBufferedImage
+                                (this::setCurrentImageOnView));
+        setCurrentImageOnView();
     }
 }

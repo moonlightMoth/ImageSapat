@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class ImageParams
 {
-    public static final String PIC_START = "./src/main/resources/shabaka.jpg";
+    public static String PIC_PATH = "./src/main/resources/shabaka.jpg";
     private IntegerProperty bright = new SimpleIntegerProperty();
     private BooleanProperty inversion = new SimpleBooleanProperty();
     private IntegerProperty Rcolor = new SimpleIntegerProperty();

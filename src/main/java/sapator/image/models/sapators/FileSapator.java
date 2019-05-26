@@ -22,6 +22,7 @@ public class FileSapator
                     break;
 
                 case OPEN:
+                    ImageParams.PIC_PATH = file.getAbsolutePath();
                     ImageParams.getInstance()
                         .setBufferedImage(ImageIO.read(file.getAbsoluteFile()));
                     break;

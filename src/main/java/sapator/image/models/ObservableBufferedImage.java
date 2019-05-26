@@ -18,7 +18,7 @@ public class ObservableBufferedImage
         try
         {
             bufferedImage = ImageIO.read(
-                    new FileInputStream(ImageParams.PIC_START));
+                    new FileInputStream(ImageParams.PIC_PATH));
 
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             ImageIO.write(bufferedImage,"jpg", bao);
