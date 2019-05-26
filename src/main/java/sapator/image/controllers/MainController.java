@@ -20,6 +20,12 @@ public class MainController
     private static Stage stage = null;
 
     @FXML
+    private Button downloadButton;
+
+    @FXML
+    private Button reloadButton;
+
+    @FXML
     private Button saveButton;
 
     @FXML
@@ -36,9 +42,6 @@ public class MainController
 
     @FXML
     private CheckBox inversionCheckbox;
-
-    @FXML
-    private Button downloadButton;
 
     @FXML
     private ImageView imageView;
@@ -69,8 +72,6 @@ public class MainController
     {
         ImageParams.getInstance().setBright(newBright);
 
-        System.out.println(ImageParams.getInstance().getBright());
-
         PixelSapator.brightSapator.doSapat();
     }
 
@@ -85,6 +86,13 @@ public class MainController
         }
     }
 
+    private void onClickReload()
+    {
+        setStartValues();
+
+        initImage();
+    }
+
     private File getFile(MOOD mood) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(mood.getDescription());
@@ -96,11 +104,11 @@ public class MainController
     {
         inversionCheckbox.setSelected(false);
 
-        brightnessSlider.setValue(brightnessSlider.getMin());
+        brightnessSlider.setValue(0);
 
-        redSlider  .setValue(redSlider  .getMin());
-        blueSlider .setValue(blueSlider .getMin());
-        greenSlider.setValue(greenSlider.getMin());
+        redSlider  .setValue(0);
+        blueSlider .setValue(0);
+        greenSlider.setValue(0);
     }
 
     public void onClickInversion()
@@ -134,9 +142,6 @@ public class MainController
                 break;
         }
 
-
-        System.out.println(deltaColor + " " + color.toString());
-
         PixelSapator.colorSapator.doSapat();
 
     }
@@ -161,10 +166,7 @@ public class MainController
     private void initialize()
     {
 
-        ImageParams.getInstance().setObservableBufferedImage(
-            new ObservableBufferedImage(this::setCurrentImageOnView));
-
-        setCurrentImageOnView();
+        initImage();
 
         brightnessSlider.valueProperty().addListener(
                 (observableValue, number, newNumber) ->
@@ -186,5 +188,16 @@ public class MainController
 
         downloadButton.setOnAction((actionEvent -> onClickDownload()));
 
+        reloadButton.setOnAction((actionEvent -> onClickReload()));
+
+    }
+
+    private void initImage()
+    {
+        ImageParams.getInstance().
+                setObservableBufferedImage(
+                        new ObservableBufferedImage
+                                (this::setCurrentImageOnView));
+        setCurrentImageOnView();
     }
 }

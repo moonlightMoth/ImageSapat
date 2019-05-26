@@ -23,6 +23,9 @@
                         <Button fx:id="downloadButton"
                                 text="Download"/>
 
+                        <Button fx:id="reloadButton"
+                                text="Reload"/>
+
                         <Button fx:id="saveButton"
                                 text="Save"/>
 
@@ -30,7 +33,7 @@
 
                         <Slider fx:id="brightnessSlider"
                                 min="0"
-                                max="100"
+                                max="255"
                                 blockIncrement="1.0"
                                 showTickLabels="true"
                                 showTickMarks="true"/>
@@ -42,7 +45,7 @@
                         <Label text="Red"/>
 
                         <Slider fx:id="redSlider"
-                                min="0"
+                                min="-255"
                                 max="255"
                                 blockIncrement="1.0"
                                 showTickLabels="true"
@@ -51,7 +54,7 @@
                         <Label text="Green"/>
 
                         <Slider fx:id="greenSlider"
-                                min="0"
+                                min="-255"
                                 max="255"
                                 blockIncrement="1.0"
                                 showTickLabels="true"
@@ -60,7 +63,7 @@
                         <Label text="Blue"/>
 
                         <Slider fx:id="blueSlider"
-                                min="0"
+                                min="-255"
                                 max="255"
                                 blockIncrement="1.0"
                                 showTickLabels="true"
@@ -69,9 +72,7 @@
                 </VBox>
             </GridPane>
 
-            <ImageView fx:id="imageView"
-                       fitWidth="400.0"
-                       fitHeight="400.0">
+            <ImageView fx:id="imageView">
             </ImageView>
         </children>
     </HBox>
