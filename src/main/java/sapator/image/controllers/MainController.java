@@ -20,7 +20,7 @@ public class MainController
     private static Stage stage = null;
 
     @FXML
-    private Button downloadButton;
+    private Button openButton;
 
     @FXML
     private Button reloadButton;
@@ -63,7 +63,8 @@ public class MainController
         try {
             FileSapator.doSapat(MOOD.SAVE, getFile(MOOD.SAVE));
         } catch (IOException e) {
-            e.printStackTrace();//TODO
+            setStartValues();
+            imageView.setImage(new Image(ImageParams.CAT_PATH));
         }
     }
 
@@ -75,22 +76,30 @@ public class MainController
         PixelSapator.brightSapator.doSapat();
     }
 
-    private void onClickDownload()
+    private void onClickOpen()
     {
         try {
             setStartValues();
 
             FileSapator.doSapat(MOOD.OPEN, getFile(MOOD.OPEN));
         } catch (IOException e) {
-            e.printStackTrace();//TODO
+            setStartValues();
+            imageView.setImage(new Image(ImageParams.CAT_PATH));
         }
     }
 
-    private void onClickReload()
-    {
-        setStartValues();
 
-        initImage();
+    void onClickReload()
+    {
+        try {
+            setStartValues();
+
+            FileSapator.doSapat(MOOD.OPEN, new File(ImageParams.PIC_PATH));
+        } catch (IOException e)
+        {
+            setStartValues();
+            imageView.setImage(new Image(ImageParams.CAT_PATH));
+        }
     }
 
     private File getFile(MOOD mood) {
@@ -150,7 +159,7 @@ public class MainController
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         try
         {
-            ImageIO.write(ImageParams.getInstance().getObservableBufferedImage(),"jpg", bao);
+            ImageIO.write(ImageParams.getInstance().getBufferedImage(),"jpg", bao);
         }
         catch (IOException e)
         {
@@ -160,6 +169,18 @@ public class MainController
         ByteArrayInputStream bis = new ByteArrayInputStream(bao.toByteArray());
 
         imageView.setImage(new Image(bis));
+    }
+
+
+    void forTest()
+    {
+        blueSlider.setValue(96);
+//        PixelSapator.colorSapator.doSapat();
+        redSlider.setValue(96);
+//        PixelSapator.colorSapator.doSapat();
+        greenSlider.setValue(96);
+//        PixelSapator.colorSapator.doSapat();
+
     }
 
     @FXML
@@ -186,9 +207,11 @@ public class MainController
 
         saveButton.setOnAction((actionEvent) -> onClickSave());
 
-        downloadButton.setOnAction((actionEvent -> onClickDownload()));
+        openButton.setOnAction((actionEvent -> onClickOpen()));
 
         reloadButton.setOnAction((actionEvent -> onClickReload()));
+
+//        forTest();
 
     }
 

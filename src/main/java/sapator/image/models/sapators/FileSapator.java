@@ -17,7 +17,7 @@ public class FileSapator
                 case SAVE:
                     ImageIO.write(
                         ImageParams.getInstance()
-                            .getObservableBufferedImage(),
+                            .getBufferedImage(),
                         "jpg", file);
                     break;
 

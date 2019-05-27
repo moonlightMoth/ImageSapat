@@ -8,20 +8,20 @@
 
 <?import javafx.scene.image.ImageView?>
 
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sapator.image.controllers.MainController"
 
             prefHeight="400.0" prefWidth="600.0">
-
     <HBox>
         <children>
 
             <GridPane alignment="CENTER_LEFT">
                 <VBox>
                     <children>
-                        <Button fx:id="downloadButton"
-                                text="Download"/>
+                        <Button fx:id="openButton"
+                                text="Open"/>
 
                         <Button fx:id="reloadButton"
                                 text="Reload"/>

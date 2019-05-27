@@ -6,7 +6,8 @@ import java.util.function.Function;
 
 public class PixelSapator
 {
-    public static final PixelSapator invSapator = new PixelSapator((pixel) -> ~pixel);
+    public static final PixelSapator invSapator = new PixelSapator((pixel) ->
+            ~pixel /*- 0x00010000 - 0x00000100 - 0x00000001*/);
 
     public static final PixelSapator colorSapator = new PixelSapator((pixel) -> {
         int rS = ImageParams.getInstance().getRcolor();
@@ -86,7 +87,7 @@ public class PixelSapator
 
     public void doSapat()
     {
-        BufferedImage img = ImageParams.getInstance().getObservableBufferedImage();
+        BufferedImage img = ImageParams.getInstance().getBufferedImage();
         int pixel;
         for (int x = 0; x < img.getWidth(); x++) {
             for (int y = 0; y < img.getHeight(); y++) {
