@@ -51,29 +51,26 @@ public class MainController
     {
         return stage;
     }
-
     public static void setStage(Stage stage)
     {
         MainController.stage = stage;
     }
 
+    private void smthGoingWrong()
+    {
+        setStartValues();
+
+        imageView.setImage(new Image(ImageParams.CAT_PATH));
+        ImageParams.PIC_PATH = ImageParams.CAT_PATH;
+    }
 
     private void onClickSave()
     {
         try {
             FileSapator.doSapat(MOOD.SAVE, getFile(MOOD.SAVE));
         } catch (IOException e) {
-            setStartValues();
-            imageView.setImage(new Image(ImageParams.CAT_PATH));
+            smthGoingWrong();
         }
-    }
-
-
-    private void onChangeBright(int newBright)
-    {
-        ImageParams.getInstance().setBright(newBright);
-
-        PixelSapator.brightSapator.doSapat();
     }
 
     private void onClickOpen()
@@ -83,11 +80,9 @@ public class MainController
 
             FileSapator.doSapat(MOOD.OPEN, getFile(MOOD.OPEN));
         } catch (IOException e) {
-            setStartValues();
-            imageView.setImage(new Image(ImageParams.CAT_PATH));
+            smthGoingWrong();
         }
     }
-
 
     void onClickReload()
     {
@@ -97,27 +92,16 @@ public class MainController
             FileSapator.doSapat(MOOD.OPEN, new File(ImageParams.PIC_PATH));
         } catch (IOException e)
         {
-            setStartValues();
-            imageView.setImage(new Image(ImageParams.CAT_PATH));
+            smthGoingWrong();
         }
     }
 
-    private File getFile(MOOD mood) {
+    private File getFile(MOOD mood)
+    {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(mood.getDescription());
 
         return mood.getFile().apply(fileChooser);
-    }
-
-    private void setStartValues()
-    {
-        inversionCheckbox.setSelected(false);
-
-        brightnessSlider.setValue(0);
-
-        redSlider  .setValue(0);
-        blueSlider .setValue(0);
-        greenSlider.setValue(0);
     }
 
     public void onClickInversion()
@@ -127,7 +111,8 @@ public class MainController
         PixelSapator.invSapator.doSapat();
     }
 
-    private enum Color{
+    private enum Color
+    {
         RED, GREEN, BLUE
     }
 
@@ -155,7 +140,26 @@ public class MainController
 
     }
 
-    private void setCurrentImageOnView() {
+    private void onChangeBright(int newBright)
+    {
+        ImageParams.getInstance().setBright(newBright);
+
+        PixelSapator.brightSapator.doSapat();
+    }
+
+    private void setStartValues()
+    {
+        inversionCheckbox.setSelected(false);
+
+        brightnessSlider.setValue(0);
+
+        redSlider  .setValue(0);
+        blueSlider .setValue(0);
+        greenSlider.setValue(0);
+    }
+
+    private void setCurrentImageOnView()
+    {
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         try
         {
@@ -171,16 +175,13 @@ public class MainController
         imageView.setImage(new Image(bis));
     }
 
-
-    void forTest()
+    private void initImage()
     {
-        blueSlider.setValue(96);
-//        PixelSapator.colorSapator.doSapat();
-        redSlider.setValue(96);
-//        PixelSapator.colorSapator.doSapat();
-        greenSlider.setValue(96);
-//        PixelSapator.colorSapator.doSapat();
-
+        ImageParams.getInstance().
+                setObservableBufferedImage(
+                        new ObservableBufferedImage
+                                (this::setCurrentImageOnView));
+        setCurrentImageOnView();
     }
 
     @FXML
@@ -190,20 +191,20 @@ public class MainController
         initImage();
 
         brightnessSlider.valueProperty().addListener(
-                (observableValue, number, newNumber) ->
-                        onChangeBright(newNumber.intValue()-number.intValue()));
+            (observableValue, number, newNumber) ->
+                onChangeBright(newNumber.intValue()-number.intValue()));
 
         redSlider.valueProperty().addListener(
-                (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue()-number.intValue(), Color.RED));
+            (observableValue, number, newNumber) ->
+                onChangeColor(newNumber.intValue()-number.intValue(), Color.RED));
 
         greenSlider.valueProperty().addListener(
-                (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue()-number.intValue(), Color.GREEN));
+            (observableValue, number, newNumber) ->
+                onChangeColor(newNumber.intValue()-number.intValue(), Color.GREEN));
 
         blueSlider.valueProperty().addListener(
-                (observableValue, number, newNumber) ->
-                        onChangeColor(newNumber.intValue()-number.intValue(), Color.BLUE));
+            (observableValue, number, newNumber) ->
+                onChangeColor(newNumber.intValue()-number.intValue(), Color.BLUE));
 
         saveButton.setOnAction((actionEvent) -> onClickSave());
 
@@ -213,14 +214,5 @@ public class MainController
 
 //        forTest();
 
-    }
-
-    private void initImage()
-    {
-        ImageParams.getInstance().
-                setObservableBufferedImage(
-                        new ObservableBufferedImage
-                                (this::setCurrentImageOnView));
-        setCurrentImageOnView();
     }
 }

@@ -9,7 +9,7 @@ public class ImageParams
 {
     private static String shabaka = "./src/main/resources/shabaka.jpg";
     private static String sa = "./src/test/resources/sa.jpg";
-    public static final String CAT_PATH = "file:/home/moonlightmoth/IdeaProjects/ImageSapat/src/main/resources/failure.jpeg";
+    public static final String CAT_PATH = "file:./src/main/resources/failure.jpeg";
     public static String PIC_PATH = shabaka;
     private IntegerProperty bright = new SimpleIntegerProperty();
     private BooleanProperty inversion = new SimpleBooleanProperty();
@@ -20,7 +20,8 @@ public class ImageParams
 
     private static ImageParams curState;
 
-    private ImageParams() {
+    private ImageParams()
+    {
     }
 
     public static ImageParams getInstance()
@@ -31,9 +32,6 @@ public class ImageParams
         }
         return curState;
     }
-
-
-
 
     public int getBright()
     {
