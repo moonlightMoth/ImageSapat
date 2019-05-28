@@ -72,7 +72,7 @@ public class MainController
 
     private void setDisable(boolean state)
     {
-        textOnError.setDisable(state);
+        textOnError.setVisible(state);
 
         inversionCheckbox.setDisable(state);
 

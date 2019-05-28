@@ -76,7 +76,7 @@
             <VBox>
                 <ImageView fx:id="imageView"/>
                 <Text fx:id="textOnError"
-                      disable="true"
+                      visible="false"
                       fill="red">
                     Лапки не дотянулись!</Text>
             </VBox>
