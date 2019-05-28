@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sapator.image.models.ImageParams;
@@ -18,6 +19,8 @@ import java.io.*;
 public class MainController
 {
     private static Stage stage = null;
+    @FXML
+    public Text textOnError;
 
     @FXML
     private Button openButton;
@@ -62,6 +65,25 @@ public class MainController
 
         imageView.setImage(new Image(ImageParams.CAT_PATH));
         ImageParams.PIC_PATH = ImageParams.CAT_PATH;
+
+        setDisable(true);
+
+    }
+
+    private void setDisable(boolean state)
+    {
+        textOnError.setDisable(state);
+
+        inversionCheckbox.setDisable(state);
+
+        reloadButton.setDisable(state);
+        saveButton.setDisable(state);
+
+        greenSlider.setDisable(state);
+        blueSlider.setDisable(state);
+        redSlider.setDisable(state);
+
+        brightnessSlider.setDisable(state);
     }
 
     private void onClickSave()
@@ -79,6 +101,8 @@ public class MainController
             setStartValues();
 
             FileSapator.doSapat(MOOD.OPEN, getFile(MOOD.OPEN));
+
+            setDisable(false);
         } catch (IOException e) {
             smthGoingWrong();
         }

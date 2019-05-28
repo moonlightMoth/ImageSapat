@@ -1,7 +1,6 @@
 package sapator.image.models;
 
 import javafx.beans.property.*;
-import sapator.image.controllers.MainController;
 
 import java.awt.image.BufferedImage;
 

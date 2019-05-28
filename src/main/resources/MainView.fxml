@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sapator.image.controllers.MainController"
@@ -72,8 +73,14 @@
                 </VBox>
             </GridPane>
 
-            <ImageView fx:id="imageView">
-            </ImageView>
+            <VBox>
+                <ImageView fx:id="imageView"/>
+                <Text fx:id="textOnError"
+                      disable="true"
+                      fill="red">
+                    Лапки не дотянулись!</Text>
+            </VBox>
+
         </children>
     </HBox>
 
