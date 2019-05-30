@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application
 {
-
+    MainApp app = this;
     @Override
     public void start(Stage stage) throws Exception
     {

@@ -108,7 +108,7 @@ public class MainController
         }
     }
 
-    void onClickReload()
+    private void onClickReload()
     {
         try {
             setStartValues();
